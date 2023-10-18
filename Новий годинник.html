@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Оновлення часу</title>
+    <style>
+        #clock {
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div id="clock">Час: 00:00:00</div>
+    <div id="updateMessage" style="display: none; color: red;">Час буде оновлено через 30 секунд</div>
+
+    <script>
+        function addZeroIfSingleDigit(value) {
+            return value < 10 ? `0${value}` : value.toString();
+        }
+
+        function updateClock() {
+            const now = new Date();
+            const hours = addZeroIfSingleDigit(now.getHours());
+            const minutes = addZeroIfSingleDigit(now.getMinutes());
+            const seconds = addZeroIfSingleDigit(now.getSeconds());
+
+            const clockElement = document.getElementById("clock");
+            clockElement.textContent = `Час: ${hours}:${minutes}:${seconds}`;
+        }
+
+        function showUpdateMessage() {
+            const updateMessageElement = document.getElementById("updateMessage");
+            updateMessageElement.style.display = "block";
+        }
+
+        function hideUpdateMessage() {
+            const updateMessageElement = document.getElementById("updateMessage");
+            updateMessageElement.style.display = "none";
+        }
+
+        // Виклик функції для відображення часу при завантаженні сторінки
+        updateClock();
+
+        // Оновлення годинника кожну секунду
+        setInterval(updateClock, 1000);
+
+        // Відобразити повідомлення про оновлення через 30 секунд
+        setTimeout(showUpdateMessage, 30000);
+
+        // Оновити час і відобразити повідомлення про оновлення кожні 30 секунд
+        setInterval(() => {
+            updateClock();
+            showUpdateMessage();
+        }, 30000);
+    </script>
+</body>
+</html>
