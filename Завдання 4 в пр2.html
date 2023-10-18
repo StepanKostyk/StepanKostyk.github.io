@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Боксерські змагання</title>
+</head>
+<body>
+    <h1>Боксерські змагання</h1>
+    <p>Введіть вашу ставку:</p>
+    <input type="number" id="betAmount" min="1" step="1">
+    <button onclick="startGame()">Почати гру</button>
+    <p id="result"></p>
+
+    <script>
+        function startGame() {
+            const betAmount = parseInt(document.getElementById("betAmount").value);
+
+            if (isNaN(betAmount) || betAmount <= 0) {
+                alert("Введіть коректну суму ставки.");
+                return;
+            }
+
+            setTimeout(function () {
+                const randomValue = Math.floor(Math.random() * 11) - 5;
+                let resultMessage = "";
+                
+                if (randomValue <= 0) {
+                    resultMessage = "Ви не вгадали!";
+                } else {
+                    const winnings = betAmount * randomValue;
+                    resultMessage = `Ви виграли ${winnings} гривень!`;
+                }
+
+                document.getElementById("result").textContent = resultMessage;
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
