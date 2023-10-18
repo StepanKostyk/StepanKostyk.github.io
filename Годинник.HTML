@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Годинник</title>
+</head>
+<body>
+    <div id="clock">Годинник: 00:00:00</div>
+
+    <script>
+        function addZeroIfSingleDigit(value) {
+            if (value < 10) {
+                return `0${value}`;
+            } else {
+                return value.toString();
+            }
+        }
+
+        function updateClock() {
+            const now = new Date();
+            const hours = addZeroIfSingleDigit(now.getHours());
+            const minutes = addZeroIfSingleDigit(now.getMinutes());
+            const seconds = addZeroIfSingleDigit(now.getSeconds());
+
+            const clockElement = document.getElementById("clock");
+            clockElement.textContent = `Годинник: ${hours}:${minutes}:${seconds}`;
+        }
+
+        // Оновлення годинника кожну секунду
+        setInterval(updateClock, 1000);
+
+        // Виклик функції для відображення часу при завантаженні сторінки
+        updateClock();
+    </script>
+</body>
+</html>
