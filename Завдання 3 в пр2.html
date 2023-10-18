@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ефект друкарської машинки</title>
+    <style>
+        #output {
+            font-size: 24px;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <div id="output"></div>
+    
+    <script>
+        const textToType = "Ваш текст для друкарської машинки"; // Замініть це фразою, яку ви хочете вивести
+        const outputElement = document.getElementById("output");
+        let charIndex = 0;
+
+        function typeCharacter() {
+            if (charIndex < textToType.length) {
+                outputElement.textContent += textToType.charAt(charIndex);
+                charIndex++;
+            }
+        }
+
+        // Початок ефекту друкарської машинки з інтервалом 100 мс (10 символів на секунду)
+        const typingInterval = setInterval(typeCharacter, 100);
+
+        // Зупинити друкарську машинку після виведення всіх символів
+        setTimeout(function () {
+            clearInterval(typingInterval);
+        }, textToType.length * 100); // Вираховуємо тривалість затримки на основі кількості символів
+    </script>
+</body>
+</html>
