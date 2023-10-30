@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DOM, BOM & JS Лабораторна Робота</title>
+<style>
+img{
+width:15rem;
+height:15rem;
+}
+</style>
+</head>
+<body>
+    <h1>Заголовок 1</h1>
+    <p>Перший абзац тексту</p>
+
+    <h2>Заголовок 2</h2>
+    <p>Другий абзац тексту</p>
+
+    <h3>Заголовок 3</h3>
+    <p>Третій абзац тексту</p>
+
+    <img src="your-image.jpg" alt="Малюнок">
+
+    <table border="1">
+        <tr>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>8</td>
+            <td>9</td>
+        </tr>
+    </table>
+
+    <button id="moveText">Перемістити текст</button>
+
+    <script>
+        document.getElementById("moveText").addEventListener("click", function () {
+            var paragraphs = document.getElementsByTagName("p");
+            var tableCells = document.getElementsByTagName("td");
+            for (var i = 0; i < paragraphs.length; i++) {
+                var text = paragraphs[i].textContent;
+                tableCells[i + 6].textContent = text; // Додаємо 6, оскільки індекси таблиці починаються з 0
+            }
+        });
+    </script>
+</body>
+</html>
