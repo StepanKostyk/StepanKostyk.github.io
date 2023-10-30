@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Список покупок</title>
+    <style>
+        #shopping-list {
+            list-style: none;
+        }
+
+        li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .edit-input {
+            display: none;
+        }
+
+        .edit-button, .delete-button {
+            margin-left: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Список покупок</h1>
+    <input type="text" id="new-item" placeholder="Додайте новий елемент">
+    <button id="add-item">Додати елемент</button>
+
+    <ul id="shopping-list"></ul>
+
+    <script>
+        const shoppingList = document.getElementById("shopping-list");
+        const newItemInput = document.getElementById("new-item");
+        const addItemButton = document.getElementById("add-item");
+
+        addItemButton.addEventListener("click", addItem);
+
+        function addItem() {
+            const itemName = newItemInput.value.trim();
+            if (itemName === "") {
+                alert("Будь ласка, введіть назву елементу.");
+                return;
+            }
+
+            const li = document.createElement("li");
+            li.innerHTML = `<span>${itemName}</span> <input class="edit-input" type="text" value="${itemName}"> <span class="edit-button">Редагувати</span> <span class="delete-button">Видалити</span>`;
+            shoppingList.appendChild(li);
+            newItemInput.value = "";
+
+            const editButton = li.querySelector(".edit-button");
+            const deleteButton = li.querySelector(".delete-button");
+            const editInput = li.querySelector(".edit-input");
+
+            editButton.addEventListener("click", () => {
+                editInput.style.display = "inline";
+                editInput.focus();
+                editButton.style.display = "none";
+            });
+
+            editInput.addEventListener("blur", () => {
+                const editedName = editInput.value.trim();
+                if (editedName !== "") {
+                    li.querySelector("span").textContent = editedName;
+                }
+                editInput.style.display = "none";
+                editButton.style.display = "inline";
+            });
+
+            deleteButton.addEventListener("click", () => {
+                if (confirm("Ви впевнені, що хочете видалити цей елемент?")) {
+                    li.remove();
+                }
+            });
+        }
+    </script>
+</body>
+</html>
